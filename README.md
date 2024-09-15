@@ -1,4 +1,4 @@
-<h1> <b> Dynamic Blog Post Application </b>  </h1> 
+<h1>Dynamic Blog Post Application</h1>
 <b>Project Overview </b>
 The Dynamic Blog Post Application is a web-based platform that allows users to create and share blog posts, react to others' ideas, and comment on posts. <br> 
 Although there is no specific real-world problem it addresses, this project has been created for practice purposes using a proper technology stack.
