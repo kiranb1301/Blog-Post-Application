@@ -1,41 +1,46 @@
 {% extends 'partials/base.html' %}
-{% block title %}Home Page{% endblock %}
+{% block title %}BlogyFyr{% endblock %}
 {% load crispy_forms_tags %}
-{% block content %}
+{% block content %} 
+<style> 
+    
+/* For Author's Profile Image (Crop to Circle) */
+.author-image {
+    width: 100px;  /* Width of the circular image */
+    height: 100px; /* Height of the circular image */
+    object-fit: cover;  /* Crop the image to fit within the box */
+    border-radius: 50%;  /* Make the image circular */
+    border: 2px solid #ccc;  /* Optional: Add a border to the circular image */
+}
+</style>
+
 <div class="container">
     <div class="row mt-5 pt-3">
-        {% if request.user.is_authenticated %}
-        <div class="col-md-4">
-            <div class="card my-3 shadow">
-                <div class="card-body">
-                    <form method="POST">
-                        {% csrf_token %}
-                        {{ form|crispy }}
-                        <input class="btn btn-primary btn-block" type="submit" value="Post">
-                    </form>
-                </div>
-            </div>
-        </div>
-        {% endif %}
         <div class="col-md-8">
             {% for post in posts %}
             <div class="card shadow my-3">
                 <div class="card-body">
                     <div class="row">
+                        <!-- Author's Face Image (Circular, Cropped) -->
                         <div class="col-md-4">
-                            <img class="img-thumbnail" src="{{ post.author.profilemodel.image.url }}" alt="img">
+                            <!-- Ensure 'image' field exists in the Bloggers model -->
+                            <img class="author-image" src="{{ post.author.image.url }}" alt="{{ post.author.name }}">
                         </div>
+
+                        <!-- Blog Title and Author Info -->
                         <div class="col-md-8">
                             <small>{{ post.date_created }}</small>
                             <hr>
                             <a class="h3" href="{% url 'blog-post-detail' post.id %}">{{ post.title }}</a>
-                            <p class="text-justify my-3">
-                                {{ post.content }}
+                            <p class="mt-2">
+                                <strong>Author: </strong>{{ post.author.name }}
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
+            {% empty %}
+            <p>No posts available.</p>
             {% endfor %}
         </div>
     </div>

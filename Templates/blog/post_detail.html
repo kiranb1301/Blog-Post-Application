@@ -2,6 +2,17 @@
 {% block title %}Post Detail Page{% endblock %}
 {% load crispy_forms_tags %}
 {% block content %}
+<style> 
+    
+/* For Author's Profile Image (Crop to Circle) */
+.author-image {
+    width: 100px;  /* Width of the circular image */
+    height: 100px; /* Height of the circular image */
+    object-fit: cover;  /* Crop the image to fit within the box */
+    border-radius: 50%;  /* Make the image circular */
+    border: 2px solid #ccc;  /* Optional: Add a border to the circular image */
+}
+</style>
 <div class="container">
     <div class="row mt-5 pt-3">
         <div class="col-md-8 offset-md-2">
@@ -9,10 +20,14 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-4">
-                            <img class="img-thumbnail" src="{{ post.author.profilemodel.image.url }}" alt="profile-img">
+                            <img class="author-image" src="{{ post.author.image.url }}" alt="{{ post.author.name }}">
                         </div>
+
                         <div class="col-md-8">
-                            <small>{{ post.date_created }}</small>
+                            <small>{{ post.date_created }}</small> 
+                            <p class="mt-2">
+                                <strong>Author: </strong>{{ post.author.name }}
+                            </p>
                             {% if post.author == request.user %}
                             <span><a class="btn btn-danger float-right btn-sm"
                                     href="{% url 'blog-post-delete' post.id %}">Delete</a></span>

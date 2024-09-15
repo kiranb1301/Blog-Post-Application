@@ -32,7 +32,8 @@ class Bloggers(models.Model):
     
     def update_last_login(self):
         self.last_login = timezone.now() 
-        self.save() 
+        self.save()  
+        
     @property
     def is_authenticated(self):
         return True 

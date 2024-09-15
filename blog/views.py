@@ -25,7 +25,7 @@ def post_blog(request):
             return redirect('blog-index')  # Redirect to the blog index after posting
     else:
         form = PostModelForm()
-    return render(request,'blog/index.html',{'form':form})
+    return render(request,'blog/post_blog.html',{'form':form})
 
 @login_required
 def post_detail(request, pk):

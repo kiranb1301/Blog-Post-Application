@@ -1,16 +1,23 @@
 from django.shortcuts import render
-from django.shortcuts import render,get_object_or_404
-from django.http import HttpResponse, JsonResponse
 from  .models import Bloggers
 from .forms import *
+from django.http import HttpResponse
 from django.contrib import messages 
 from django.contrib.auth import login
 from django.contrib import sessions
 from django.contrib.auth import authenticate, update_session_auth_hash,logout
-from django.contrib.auth.hashers import make_password,check_password
+from django.contrib.auth.hashers import make_password 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import redirect 
+from django.core.mail import send_mail
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes
+from django.template.loader import render_to_string
+from django.urls import reverse
+from django.contrib.auth.tokens import default_token_generator
+from django.conf import settings
 
 
 def signup_view(request):
@@ -22,14 +29,14 @@ def signup_view(request):
             pm = make_password(form1.cleaned_data.get('password'))  # Hashing the password
             mo = form1.cleaned_data.get('mobile')
             gen = form1.cleaned_data.get('gender') 
-            Bloggers(name=nm, email=em, password=pm, mobile=mo, gender=gen).save()
-            messages.success(request,"Account Created succcessfully")
-            return redirect('blog-index') 
+            Bloggers(name=nm, email=em, password=pm, mobile=mo, gender=gen).save() 
+            
         else:
             return render(request,'users/sign_up.html',{'form':form1})
     else:
         form1 = Register()
     return render(request,'users/sign_up.html',{'form':form1})
+
 
 
 def login_view(request):
