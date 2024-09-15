@@ -22,5 +22,5 @@ It focuses on implementing user authentication, protected routes, and dynamic in
 <ul>Search Functionality: Allow users to search for posts by keywords or tags</ul> 
 <ul>User Profiles: Extend the application to include customizable user profiles.</ul> 
 
-Contributing <br> 
-Contributions are welcome! Please fork this repository and submit a pull request with any improvements or feature additions.
+<h2>Contributing </h2> 
+<b>Contributions are welcome! Please fork this repository and submit a pull request with any improvements or feature additions. </b>
